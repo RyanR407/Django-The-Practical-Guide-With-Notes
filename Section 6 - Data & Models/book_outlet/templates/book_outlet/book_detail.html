@@ -1,0 +1,61 @@
+{% extends "book_outlet/base.html" %}
+<!-- 
+  *NOTES*
+  This line indicates that this template extends from the `base.html` template located in the `book_outlet` directory.
+  Template inheritance allows for a consistent layout across multiple templates.
+  https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance 
+-->
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+<!-- 
+  *NOTES*
+  This block sets the title of the page to the value of the `title` context variable.
+  The `block` tags define a block that can be overridden in child templates.
+  https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance 
+-->
+
+{% block content %}
+<!-- 
+  *NOTES*
+  This block defines the content section of the page.
+  The content inside this block will be rendered in the `{% block content %}` section of the `base.html` template.
+  https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance 
+-->
+
+  <h1>{{ title }}</h1>
+  <!-- 
+    *NOTES*
+    This line displays the book's title using the `title` context variable.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#variables 
+  -->
+
+  <h2>{{ author }}</h2>
+  <!-- 
+    *NOTES*
+    This line displays the book's author using the `author` context variable.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#variables 
+  -->
+
+  <p>The book has a rating of {{ rating }} 
+  <!-- 
+    *NOTES*
+    This line starts a paragraph that displays the book's rating using the `rating` context variable.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#variables 
+  -->
+  
+  {% if is_bestseller %}
+    and is a bestseller.
+  {% else %}
+    but isn't a bestseller.
+  {% endif %}
+  <!-- 
+    *NOTES*
+    This block checks if the `is_bestseller` context variable is `True` or `False`.
+    If `True`, it displays "and is a bestseller."
+    If `False`, it displays "but isn't a bestseller."
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#if 
+  -->
+  </p>
+{% endblock %}

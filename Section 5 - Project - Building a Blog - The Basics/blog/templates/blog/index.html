@@ -1,0 +1,79 @@
+{% extends "base.html" %} 
+<!-- *NOTES*
+This template extends `base.html`, which means it inherits all the content from the `base.html` template.
+The `{% extends %}` tag is used for template inheritance in Django.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#std-template-tag-extends
+-->
+
+{% load static %}
+<!-- *NOTES*
+This line loads the `static` template tag, which is used to serve static files in Django templates.
+https://docs.djangoproject.com/en/5.0/howto/static-files/#serving-static-files-in-templates
+-->
+
+{% block title %} 
+My Blog 
+{% endblock %} 
+<!-- *NOTES*
+This block sets the page title to "My Blog".
+The content within this block will override the corresponding block in the `base.html` template.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance
+-->
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "blog/post.css" %}" />
+  <!-- *NOTES*
+  This line links to a static CSS file named `post.css` in the `blog` directory.
+  The `{% static %}` tag is used to generate the URL for the static file.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+  -->
+
+  <link rel="stylesheet" href="{% static "blog/index.css" %}" />
+  <!-- *NOTES*
+  This line links to another static CSS file named `index.css` in the `blog` directory.
+  The `{% static %}` tag is used to generate the URL for the static file.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+  -->
+{% endblock %}
+
+{% block content %}
+<section id="welcome">
+  <header>
+    <img src="{% static "blog/images/max.png" %}" alt="Max - The Author Of This Blog" />
+    <!-- *NOTES*
+    This line creates an image tag with the source URL constructed by combining the static URL for the blog images directory with the image filename "max.png".
+    The `{% static %}` template tag is used to generate the URL for the static file.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+    -->
+    <h2>MAXIMILIAN'S BLOG</h2>
+  </header>
+  <p>Hi, I am Max and I love to blog about tech and the world!</p>
+</section>
+
+<section id="latest-posts">
+  <h2>My Latest Thoughts</h2>
+
+  <ul>
+    {% for post in posts %}
+      {% include "blog/includes/post.html" %}
+      <!-- *NOTES*
+      This line includes the `post.html` template for each post in the `posts` context.
+      The `{% include %}` tag is used to include another template and render it in the current template.
+      https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#include
+      -->
+    {% endfor %}
+  </ul>
+</section>
+
+<section id="about">
+  <h2>What I Do</h2>
+  <p>
+    I love programming, I love to help others and I enjoy exploring new
+    technologies in general!
+  </p>
+  <p>
+    My goal is to keep on growing as a developer - and if I could help you do
+    the same, I'd be very happy!
+  </p>
+</section>
+{% endblock %}

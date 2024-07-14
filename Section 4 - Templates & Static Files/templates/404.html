@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+<!-- *NOTES*
+This template extends `base.html`, which means it inherits all the content from the `base.html` template.
+The `{% extends %}` tag is used for template inheritance in Django.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#std-template-tag-extends
+-->
+
+{% block page_title %}
+  Something went wrong - we could not find that page!
+{% endblock %}
+<!-- *NOTES*
+This block sets the page title to "Something went wrong - we could not find that page!".
+The content within this block will override the corresponding block in the `base.html` template.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance
+-->
+
+{% block content %}
+  <h1>We could not find that page!</h1>
+  <p>Sorry, but we could not find a matching page!</p>
+  <!-- *NOTES*
+  This block contains the main content of the 404 error page.
+  It includes a heading and a paragraph to inform the user that the requested page could not be found.
+  https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance
+  -->
+{% endblock %}

@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Review</title>
+  <link rel="stylesheet" href="{% static "reviews/styles.css" %}">
+</head>
+<body>
+  <!-- *COMMENT THIS* -->
+  <form action="/" method="POST">
+    <!-- *NOTES*
+    The `<form>` element creates an HTML form for user input.
+    The `action="/"` attribute specifies that the form data will be submitted to the root URL.
+    The `method="POST"` attribute specifies that the form will use the POST method for data submission.
+    https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
+    -->
+    {% csrf_token %}
+    <!-- *NOTES*
+    The `{% csrf_token %}` template tag is used to include a CSRF token in the form.
+    This token is used to protect against Cross-Site Request Forgery attacks.
+    https://docs.djangoproject.com/en/5.0/ref/csrf/
+    -->
+    {% for field in form %}
+      <div class="form-control {% if field.errors %}errors{% endif %}">
+        {{ field.label_tag }}
+        <!-- *NOTES*
+        The `field.label_tag` displays the label for the form field.
+        This is automatically generated based on the field's label in the form definition.
+        https://docs.djangoproject.com/en/5.0/ref/forms/api/#django.forms.BoundField.label_tag
+        -->
+        {{ field }}
+        <!-- *NOTES*
+        The `field` renders the form field as an HTML input element.
+        This is automatically generated based on the field type in the form definition.
+        https://docs.djangoproject.com/en/5.0/ref/forms/api/#django.forms.BoundField
+        -->
+        {{ field.errors }}
+        <!-- *NOTES*
+        The `field.errors` displays any validation errors associated with the form field.
+        This is automatically generated if there are any errors in the form field.
+        https://docs.djangoproject.com/en/5.0/ref/forms/api/#django.forms.BoundField.errors
+        -->
+      </div>
+    {% endfor %}
+    <button type="submit">Send</button>
+    <!-- *NOTES*
+    The `<button>` element creates a submit button for the form.
+    The `type="submit"` attribute specifies that the button will submit the form data.
+    https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    -->
+  </form>
+</body>
+</html>

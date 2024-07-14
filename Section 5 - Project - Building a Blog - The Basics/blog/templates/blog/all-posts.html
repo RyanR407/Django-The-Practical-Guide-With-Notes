@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+<!-- *NOTES*
+This template extends `base.html`, which means it inherits all the content from the `base.html` template.
+The `{% extends %}` tag is used for template inheritance in Django.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#std-template-tag-extends
+-->
+
+{% load static %}
+<!-- *NOTES*
+This line loads the `static` template tag, which is used to serve static files in Django templates.
+https://docs.djangoproject.com/en/5.0/howto/static-files/#serving-static-files-in-templates
+-->
+
+{% block title %} 
+All My Posts
+{% endblock %} 
+<!-- *NOTES*
+This block sets the page title to "All My Posts".
+The content within this block will override the corresponding block in the `base.html` template.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance
+-->
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "blog/post.css" %}" />
+  <!-- *NOTES*
+  This line links to a static CSS file named `post.css` in the `blog` directory.
+  The `{% static %}` tag is used to generate the URL for the static file.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+  -->
+
+  <link rel="stylesheet" href="{% static "blog/all-posts.css" %}" />
+  <!-- *NOTES*
+  This line links to another static CSS file named `all-posts.css` in the `blog` directory.
+  The `{% static %}` tag is used to generate the URL for the static file.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+  -->
+{% endblock %}
+
+{% block content %}
+<section id="all-posts">
+  <h2>My Collected Posts</h2>
+  <!-- *NOTES*
+  This section contains the main content of the page.
+  The heading `<h2>` is used to display the title "My Collected Posts".
+  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements
+  -->
+
+  <ul>
+    {% for post in all_posts %}
+      {% include "blog/includes/post.html" %}
+      <!-- *NOTES*
+      This line includes the `post.html` template for each post in the `all_posts` context.
+      The `{% include %}` tag is used to include another template and render it in the current template.
+      https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#include
+      -->
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

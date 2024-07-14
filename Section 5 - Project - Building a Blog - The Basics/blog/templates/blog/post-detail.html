@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+<!-- *NOTES*
+This template extends `base.html`, which means it inherits all the content from the `base.html` template.
+The `{% extends %}` tag is used for template inheritance in Django.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#std-template-tag-extends
+-->
+
+{% load static %} 
+<!-- *NOTES*
+This line loads the `static` template tag, which is used to serve static files in Django templates.
+https://docs.djangoproject.com/en/5.0/howto/static-files/#serving-static-files-in-templates
+-->
+
+{% block title %} 
+{{ post.title }}
+{% endblock %} 
+<!-- *NOTES*
+This block sets the page title to the post's title.
+The content within this block will override the corresponding block in the `base.html` template.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance
+-->
+
+{% block css_files %} 
+<link rel="stylesheet" href="{% static "blog/post-detail.css" %}" /> 
+<!-- *NOTES*
+This line links to a static CSS file named `post-detail.css` in the `blog` directory.
+The `{% static %}` tag is used to generate the URL for the static file.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+-->
+{% endblock %} 
+
+{% block content %}
+<section id="summary">
+  <h2>{{ post.title }}</h2>
+  <article>
+    <img src="{% static "blog/images/"|add:post.image %}" alt="{{ post.title }}" />
+    <!-- *NOTES*
+    This line creates an image tag with the source URL constructed by combining the static URL for the blog images directory with the post's image filename.
+    The `{% static %}` template tag is used to generate the URL for the static file.
+    The `add` filter is used to concatenate strings in Django templates.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#add
+    -->
+    <address>By {{ post.author }}</address>
+    <!-- *NOTES*
+    This line displays the author's name in an `<address>` tag.
+    The `{{ post.author }}` syntax is used to output the value of the `author` attribute of the `post` object.
+    https://docs.djangoproject.com/en/5.0/ref/templates/language/#variables
+    -->
+    <div>Last updated on <time>{{ post.date|date:"d M Y" }}</time></div>
+    <!-- *NOTES*
+    This line displays the post's date in a `<time>` tag, formatted as "day month year".
+    The `date` filter formats the date according to the given format string.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#date
+    -->
+  </article>
+</section>
+
+<main>
+  {{ post.content|linebreaks }}
+  <!-- *NOTES*
+  This line displays the post's content in the main section of the page.
+  The `linebreaks` filter converts line breaks in plain text to HTML `<br>` and `<p>` tags.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#linebreaks
+  -->
+</main>
+{% endblock %}

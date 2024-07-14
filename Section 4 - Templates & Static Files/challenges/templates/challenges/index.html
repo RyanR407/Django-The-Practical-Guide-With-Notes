@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+<!-- *NOTES*
+This template extends `base.html`, which means it inherits all the content from the `base.html` template.
+The `{% extends %}` tag is used for template inheritance in Django.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#std-template-tag-extends
+-->
+
+{% load static %}
+<!-- *NOTES*
+This line loads the `static` template tag, which is used to serve static files in Django templates.
+https://docs.djangoproject.com/en/5.0/howto/static-files/#serving-static-files-in-templates
+-->
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "challenges/challenges.css" %}">
+  <!-- *NOTES*
+  This line links to a static CSS file named `challenges.css` in the `challenges` directory.
+  The `{% static %}` tag is used to generate the URL for the static file.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+  -->
+
+  <link rel="stylesheet" href="{% static "challenges/includes/header.css" %}">
+  <!-- *NOTES*
+  This line links to another static CSS file named `header.css` in the `challenges/includes` directory.
+  The `{% static %}` tag is used to generate the URL for the static file.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static
+  -->
+{% endblock %}
+
+{% block page_title %}
+  All Challenges
+  <!-- *NOTES*
+  This block sets the page title to "All Challenges".
+  The content within this block will override the corresponding block in the `base.html` template.
+  https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance
+  -->
+{% endblock %}
+
+{% block content %}
+  {% include "challenges/includes/header.html" %}
+  <!-- *NOTES*
+  This line includes the `header.html` template.
+  The `{% include %}` tag is used to include another template and render it in the current template.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#include
+  -->
+
+  <ul>
+    {% for month in months %}
+      <li><a href="{% url "month-challenge" month %}">{{ month|title }}</a></li>
+      <!-- *NOTES*
+      This line generates a list item with a link for each month.
+      The `{% url "month-challenge" month %}` tag generates a URL for the `month-challenge` view with the month as an argument.
+      The `|title` filter capitalizes the first letter of each word in `month`.
+      https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url
+      https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#title
+      -->
+    {% endfor %}
+  </ul>
+{% endblock %}

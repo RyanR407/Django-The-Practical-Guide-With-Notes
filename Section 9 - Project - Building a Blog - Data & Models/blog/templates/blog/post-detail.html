@@ -1,0 +1,74 @@
+{% extends "base.html" %} 
+<!-- *NOTES*
+This line indicates that this template extends from the `base.html` template.
+Template inheritance allows for a consistent layout across multiple templates.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance -->
+
+{% load static %} 
+<!-- *NOTES*
+This line loads the `static` template tag library.
+The `static` template tag is used to handle static files in templates.
+https://docs.djangoproject.com/en/5.0/howto/static-files/#staticfiles-in-templates -->
+
+{% block title %} 
+{{ post.title }}
+{% endblock %} 
+<!-- *NOTES*
+This block sets the title of the page to the title of the current post.
+The `block` tags define a block that can be overridden in child templates.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance -->
+
+{% block css_files %} 
+<link rel="stylesheet" href="{% static "blog/post-detail.css" %}" /> 
+<!-- *NOTES*
+This line includes the `post-detail.css` stylesheet from the static files.
+The `static` template tag is used to generate the URL for the static file.
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#static -->
+{% endblock %} 
+
+{% block content %}
+<!-- *NOTES*
+This block defines the content section of the page.
+The content inside this block will be rendered in the `{% block content %}` section of the `base.html` template.
+https://docs.djangoproject.com/en/5.0/ref/templates/language/#template-inheritance -->
+
+<section id="summary">
+  <h2>{{ post.title }}</h2>
+  <div>
+    {% for tag in post_tags %}
+      <span class="tag">{{ tag.caption }}</span>
+      <!-- *NOTES*
+      This line creates a span element for each tag in the `post_tags` context variable.
+      The `for` template tag is used to iterate over the `post_tags` variable.
+      https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#for -->
+    {% endfor %}
+  </div>
+  <article>
+    <img src="{% static "blog/images/"|add:post.image_name %}" alt="{{ post.title }}" />
+    <!-- *NOTES*
+    This line includes an image for the post using the `image_name` field from the `post` context variable.
+    The `static` template tag is used to generate the URL for the static file.
+    https://docs.djangoproject.com/en/5.0/howto/static-files/#staticfiles-in-templates -->
+
+    <address>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></address>
+    <!-- *NOTES*
+    This line creates an address element for the author's email and name.
+    The `mailto` link uses the `email_address` field from the `post.author` context variable.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#for -->
+
+    <div>Last updated on <time>{{ post.date|date:"d M Y" }}</time></div>
+    <!-- *NOTES*
+    This line displays the date the post was last updated.
+    The `date` template filter is used to format the date.
+    https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#date -->
+  </article>
+</section>
+
+<main>
+  {{ post.content|linebreaks }}
+  <!-- *NOTES*
+  This line displays the content of the post with line breaks converted to <br> tags.
+  The `linebreaks` template filter is used to convert line breaks to <br> tags.
+  https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#linebreaks -->
+</main>
+{% endblock %}
