@@ -14,9 +14,17 @@ class Migration(migrations.Migration):
             model_name='post',
             name='image_name',
         ),
+        # *NOTES*
+        # This removes the `image_name` field from the `Post` model.
+        # https://docs.djangoproject.com/en/5.0/ref/migrations/#django.db.migrations.operations.RemoveField
+
         migrations.AddField(
             model_name='post',
             name='image',
             field=models.ImageField(null=True, upload_to='posts'),
         ),
+        # *NOTES*
+        # This adds an `image` field to the `Post` model, which is an `ImageField` that uploads images to the 'posts' directory.
+        # The field is nullable.
+        # https://docs.djangoproject.com/en/5.0/ref/models/fields/#imagefield
     ]

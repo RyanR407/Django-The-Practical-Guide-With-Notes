@@ -22,6 +22,10 @@ class Migration(migrations.Migration):
                 ('email_address', models.EmailField(max_length=254)),
             ],
         ),
+        # *NOTES*
+        # This creates a new model named `Author` with fields `id`, `first_name`, `last_name`, and `email_address`.
+        # https://docs.djangoproject.com/en/5.0/ref/models/fields/
+
         migrations.CreateModel(
             name='Tag',
             fields=[
@@ -29,6 +33,10 @@ class Migration(migrations.Migration):
                 ('caption', models.CharField(max_length=20)),
             ],
         ),
+        # *NOTES*
+        # This creates a new model named `Tag` with fields `id` and `caption`.
+        # https://docs.djangoproject.com/en/5.0/ref/models/fields/
+
         migrations.CreateModel(
             name='Post',
             fields=[
@@ -43,4 +51,8 @@ class Migration(migrations.Migration):
                 ('tags', models.ManyToManyField(to='blog.Tag')),
             ],
         ),
+        # *NOTES*
+        # This creates a new model named `Post` with various fields, including `title`, `excerpt`, `image_name`, `date`, `slug`, `content`, `author`, and `tags`.
+        # The `author` field is a foreign key to the `Author` model, and the `tags` field is a many-to-many relationship with the `Tag` model.
+        # https://docs.djangoproject.com/en/5.0/ref/models/fields/
     ]

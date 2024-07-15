@@ -39,9 +39,6 @@ monthly_challenges = {
 # The keys are the month names, and the values are the corresponding challenge descriptions.
 
 # Create your views here.
-# *NOTES*
-# This is a placeholder comment suggesting where to define view functions.
-# View functions handle HTTP requests and return HTTP responses.
 
 def index(request):
     # *NOTES*
@@ -74,10 +71,10 @@ def index(request):
         list_items += f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"
         # *NOTES*
         # Append an HTML list item with a link to the `month_path` to the `list_items` string.
-
-    # "<li><a href="...">January</a></li><li><a href="...">February</a></li>..."
-    # *NOTES*
-    # This is a comment showing an example of what the `list_items` string will look like after the loop.
+        
+        # "<li><a href="...">January</a></li><li><a href="...">February</a></li>..."
+        # *NOTES*
+        # This is a comment showing an example of what the `list_items` string will look like after the loop.
 
     response_data = f"<ul>{list_items}</ul>"
     # *NOTES*

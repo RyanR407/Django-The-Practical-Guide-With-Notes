@@ -14,5 +14,16 @@
       <input type="hidden" name="review_id" value="{{ review.id }}">
       <button>Favorite</button>
     </form>
+    <!--
+    *NOTES*
+    This form allows the user to mark the review as a favorite.
+    The `action` attribute specifies the URL to which the form data will be submitted.
+    The `method` attribute specifies that the form will be submitted using the POST method.
+    The `{% csrf_token %}` tag adds a CSRF token to the form for security.
+    The hidden input field includes the `review_id` which is sent with the form data.
+    https://docs.djangoproject.com/en/3.1/ref/csrf/
+    https://docs.djangoproject.com/en/3.1/topics/forms/#the-view
+    https://docs.djangoproject.com/en/3.1/topics/forms/#form-template
+    -->
   {% endif %}
 {% endblock %}

@@ -11,11 +11,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from os import getenv
+from os import getenv 
+# *NOTES*
+# This line imports the `getenv` function from the `os` module.
+# `getenv` is used to retrieve environment variables, which is useful for configuring settings dynamically.
+# https://docs.python.org/3/library/os.html#os.getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -24,18 +27,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'l1s5h%-io2b)u&4__&ms1g=x@b0v+!a!o2z6#sl!t$l45$ah^6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("IS_DEVELOPMENT", True)
+DEBUG = getenv("IS_DEVELOPMENT", True) 
+# *NOTES*
+# This line sets the `DEBUG` variable based on an environment variable `IS_DEVELOPMENT`.
+# If `IS_DEVELOPMENT` is not set, it defaults to `True`. This allows easy switching between development and production environments.
+# https://docs.djangoproject.com/en/3.1/ref/settings/#debug
 
 ALLOWED_HOSTS = [
     getenv("APP_HOST", "localhost")
 ]
-
+# *NOTES*
+# This line sets the `ALLOWED_HOSTS` variable based on an environment variable `APP_HOST`.
+# If `APP_HOST` is not set, it defaults to "localhost". This specifies which hosts are allowed to access the application.
+# https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts
 
 # Application definition
 
 INSTALLED_APPS = [
     'blog',
-    'storages',
+    'storages', 
+    # *NOTES*
+    # This line adds the `storages` app to the `INSTALLED_APPS` list.
+    # `django-storages` is a collection of custom storage backends for Django, including support for AWS S3.
+    # https://django-storages.readthedocs.io/en/latest/
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,10 +90,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_site.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 
 DATABASES = {
     'default': {
@@ -91,7 +103,10 @@ DATABASES = {
         'PORT': '5432'
     }
 }
-
+# *NOTES*
+# This section configures the database settings to use PostgreSQL.
+# You should replace `<your-rds-db-username>`, `<your-rds-db-user-password>`, and `<your-rds-db-host>` with your actual RDS database credentials.
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -111,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -125,11 +139,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles" 
+# *NOTES*
+# This line sets the `STATIC_ROOT` where Django will collect all static files for deployment.
+# https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-STATIC_ROOT
+
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
@@ -139,15 +156,54 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/files/"
 
-AWS_STORAGE_BUCKET_NAME = "<your-s3-bucketname>"
-AWS_S3_REGION_NAME = "<your-s3-bucket-region>"
-AWS_ACCESS_KEY_ID = "<your-aws-access-key-id>"
-AWS_SECRET_ACCESS_KEY = "<your-aws-secret-access-key>"
+AWS_STORAGE_BUCKET_NAME = "<your-s3-bucketname>" 
+# *NOTES*
+# This line sets the AWS S3 bucket name to be used for storing files.
+# You should replace `<your-s3-bucketname>` with your actual S3 bucket name.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
 
-AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+AWS_S3_REGION_NAME = "<your-s3-bucket-region>" 
+# *NOTES*
+# This line sets the AWS S3 region name for the bucket.
+# You should replace `<your-s3-bucket-region>` with your actual S3 bucket region.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
 
-STATICFILES_FOLDER = "static"
-MEDIAFILES_FOLDER = "media"
+AWS_ACCESS_KEY_ID = "<your-aws-access-key-id>" 
+# *NOTES*
+# This line sets the AWS access key ID.
+# You should replace `<your-aws-access-key-id>` with your actual AWS access key ID.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
 
-STATICFILES_STORAGE = "custom_storages.StaticFileStorage"
-DEFAULT_FILE_STORAGE = "custom_storages.MediaFileStorage"
+AWS_SECRET_ACCESS_KEY = "<your-aws-secret-access-key>" 
+# *NOTES*
+# This line sets the AWS secret access key.
+# You should replace `<your-aws-secret-access-key>` with your actual AWS secret access key.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com" 
+# *NOTES*
+# This line sets the custom domain for the S3 bucket.
+# This allows serving files directly from the S3 bucket using the custom domain.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+
+STATICFILES_FOLDER = "static" 
+# *NOTES*
+# This line sets the folder name in the S3 bucket where static files will be stored.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+
+MEDIAFILES_FOLDER = "media" 
+# *NOTES*
+# This line sets the folder name in the S3 bucket where media files will be stored.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+
+STATICFILES_STORAGE = "custom_storages.StaticFileStorage" 
+# *NOTES*
+# This line sets the storage backend for static files to use a custom S3 storage class.
+# `custom_storages.StaticFileStorage` is defined in the `custom_storages.py` file.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+
+DEFAULT_FILE_STORAGE = "custom_storages.MediaFileStorage" 
+# *NOTES*
+# This line sets the storage backend for media files to use a custom S3 storage class.
+# `custom_storages.MediaFileStorage` is defined in the `custom_storages.py` file.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html

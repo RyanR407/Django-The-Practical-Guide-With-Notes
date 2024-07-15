@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+# *NOTES*
+# The `INSTALLED_APPS` setting includes the 'blog' app, which is the custom app created for this project.
+# This setting lists all applications that are enabled in this Django installation.
+# https://docs.djangoproject.com/en/5.0/ref/settings/#installed-apps
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,6 +73,10 @@ TEMPLATES = [
         },
     },
 ]
+# *NOTES*
+# The `DIRS` option in the `TEMPLATES` setting specifies the directories where Django will search for templates.
+# `BASE_DIR / "templates"` means there is a directory named 'templates' at the project root level.
+# https://docs.djangoproject.com/en/5.0/ref/settings/#dirs
 
 WSGI_APPLICATION = 'my_site.wsgi.application'
 
@@ -125,6 +133,15 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+# *NOTES*
+# The `STATICFILES_DIRS` setting specifies additional locations the staticfiles app will traverse to find static files.
+# `BASE_DIR / "static"` means there is a directory named 'static' at the project root level.
+# https://docs.djangoproject.com/en/5.0/ref/settings/#staticfiles-dirs
 
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/files/"
+# *NOTES*
+# `MEDIA_ROOT` is the filesystem path to store user-uploaded files.
+# `MEDIA_URL` is the URL that handles the media served from `MEDIA_ROOT`.
+# https://docs.djangoproject.com/en/5.0/ref/settings/#media-root
+# https://docs.djangoproject.com/en/5.0/ref/settings/#media-url

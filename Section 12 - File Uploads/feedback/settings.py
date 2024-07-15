@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'profiles',
+    # *NOTES*
+    # Added the profiles app to the list.
     'reviews',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -122,4 +124,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = BASE_DIR / "uploads"
+# *NOTES*
+# This line sets the `MEDIA_ROOT` setting to specify the directory where uploaded media files are stored.
+# `BASE_DIR / "uploads"` means the `uploads` directory inside the project's base directory.
+# https://docs.djangoproject.com/en/5.0/ref/settings/#media-root
+
 MEDIA_URL = "/user-media/"
+# *NOTES*
+# This line sets the `MEDIA_URL` setting to specify the base URL that serves the media files.
+# `"/user-media/"` means the URL prefix for accessing media files is `/user-media/`.
+# https://docs.djangoproject.com/en/5.0/ref/settings/#media-url

@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'reviews', # *COMMENT THIS*
+    'reviews',
     # *NOTES*
     # Added the reviews app to the list.
     'django.contrib.admin',

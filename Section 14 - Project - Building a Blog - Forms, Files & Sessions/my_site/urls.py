@@ -18,7 +18,15 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+# *COMMENT THIS*
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blog.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# *NOTES*
+# This URL configuration maps URLs to views.
+# The `path` function is used to define URL patterns and associate them with views or other URL configurations.
+# `include` is used to reference another URLconf.
+# The `static` function is used to serve media files during development.
+# https://docs.djangoproject.com/en/5.0/topics/http/urls/
+# https://docs.djangoproject.com/en/5.0/ref/urls/#django.conf.urls.static.static

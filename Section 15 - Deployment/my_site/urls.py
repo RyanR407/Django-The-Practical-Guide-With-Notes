@@ -21,4 +21,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blog.urls"))
-]
+]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# *NOTES*
+# The `static` function and its usage in the urlpatterns are commented out because we are using AWS S3 to serve media files.
+# The static files are handled by the custom storage backends defined in `custom_storages.py`.
+# https://docs.djangoproject.com/en/3.1/ref/contrib/staticfiles/#django.conf.urls.static.static

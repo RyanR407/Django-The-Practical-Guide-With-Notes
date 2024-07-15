@@ -21,4 +21,8 @@ class Migration(migrations.Migration):
                 ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='blog.post')),
             ],
         ),
+        # *NOTES*
+        # This creates a new model named `Comment` with fields `id`, `user_name`, `user_email`, `text`, and `post`.
+        # The `post` field is a foreign key to the `Post` model and is related by a one-to-many relationship.
+        # https://docs.djangoproject.com/en/5.0/ref/models/fields/
     ]
