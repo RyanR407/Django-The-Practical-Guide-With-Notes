@@ -11,3 +11,4 @@
 
 * I will not duplicate notes from earlier sections into future sections, unless it is necessary.
 * In the first coding section "Section 3 - Urls & Views", I go over every line of code in all of the project files, for completeness.
+* In "Section 15 - Deployment" there is a "deployment-notes.md" file that has notes for what we did in the section, because the code notes do not give good reference to the process.
